@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Products";
+}
+
+    <div class="row">
+        <div class="col-md-6" style="padding-top:50px;">
+            @using (@Html.BeginForm("Index", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Search" id="Search" placeholder="Search" style="height: 45px;max-width: 100%;" />
+                        <div class="input-group-addon">
+                            <input type="submit" class="btn btn-sm" value="Search" />
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        <div class="col-md-12 product-list">
+            @foreach(var product in ViewBag.products) {
+                <div class="card" style="width: 25rem;">
+                    <div class="product-image-container">
+                        <img src = "@product.Image" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <div class="product-descrption-container">
+                            <p class="card-text">@product.Description</p>
+                        </div>
+                        <p class="product-descrption"><span>Category:</span>@product.Category.CategoryName</p>
+                        @Html.ActionLink("View", "Details", "Product", new { id = product.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "Edit", "Product", new { id = product.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", "Product", new { id = product.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
